@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./style.css";
 import Form from "./Components/Form";
 import Todo from "./Components/Todo";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(() => {
+    const localValue = localStorage.getItem("TODOS");
+    return localValue == null ? [] : JSON.parse(localValue);
+  });
+
+  useEffect(() => {
+    localStorage.setItem("TODOS", JSON.stringify(todos));
+  }, [todos]);
 
   const deleteTodo = (id) => {
     setTodos((prevTodos) => {
@@ -37,7 +44,6 @@ function App() {
         completed: false,
       },
     ]);
-    console.log(todos);
   };
 
   return (

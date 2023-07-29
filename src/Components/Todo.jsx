@@ -4,6 +4,7 @@ export default function Todo({ todos, handleCompletedTodo, deleteTodo }) {
       <input
         type="checkbox"
         id={todo.id}
+        checked={todo.completed}
         onChange={() => handleCompletedTodo(todo.id)}
       />
       <label htmlFor={todo.id}>{todo.text}</label>
